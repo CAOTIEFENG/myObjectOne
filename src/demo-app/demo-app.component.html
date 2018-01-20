@@ -1,0 +1,46 @@
+<h1>Angular 2 Gantt Demo</h1>
+<gantt [project]="project" [options]="options" (onGridRowClick)="gridRowClicked($event)"></gantt>
+
+<div *ngIf="project">
+    <h1>Project</h1>
+    <input type="text" [(ngModel)]="project.name"/>
+    <table>
+        <thead>
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Tree Path</td>
+                <td>Percent Complete</td>
+                <td>Start Date</td>
+                <td>End Date</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let task of project.tasks">
+                <td><input style="width:100%" type="text" [(ngModel)]="task.id"/></td>
+                <td><input style="width:100%" type="text" [(ngModel)]="task.name"/></td>
+                <td><input type="width:100%" type="text" [(ngModel)]="task.treePath"/></td>
+                <td><input type="number" [(ngModel)]="task.percentComplete" min="0" max="100"/>
+                <td><input type="text" [(ngModel)]="task.start"/></td>
+                <td><input type="text" [(ngModel)]="task.end"/></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h1>Playground</h1>
+    Task Status: 
+    <select #taskStatus>
+        <option>Error</option>
+        <option>Warning</option>
+        <option>Information</option>
+        <option>Completed</option>
+    </select>
+    <button (click)="createTask(taskStatus)">Create Task</button>
+    <button (click)="updateTasks()">Update Tasks Percent Complete</button>
+    <button (click)="loadBigDataSet()">Load big dataset</button>
+
+    <h1>Output</h1>
+    <p>{{ project | json }}</p>
+
+</div>
